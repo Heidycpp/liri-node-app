@@ -1,8 +1,8 @@
 var keys = require("./keys.js");
 var spotify = require("spotify");
 var twitter = require("twitter");
-// var tmdb = require("tmdb").init({apikey:"798d16e44bf2357493e013567298dcd5"});
-// var TmdbApi = require("tmdb-api");
+// var omdb = require("omdb").init({apikey:"40e9cece"});
+// var OmdbApi = require("omdb-api");
 var request = require("request");
 var fs = require("fs");
 
@@ -53,8 +53,8 @@ switch (action){
 
 //Functions
 
-//Commands for Liri to take in...
-// * `my-tweets`
+//Commands to take in `my-tweets`
+
 function myTweets(){
 
 var twitterKeys = keys.twitterKeys;
@@ -82,7 +82,7 @@ client.get("statuses/user_timeline", params, function(error, tweets, response) {
 });
 }
 
-// * `spotify-this-song`
+// * `spotify`
 function spotifyThisSong (){
 
   spotify.search({
@@ -93,7 +93,7 @@ function spotifyThisSong (){
         console.log("Error occurred: " + err);
         return;
       }
-  // * if no song is provided then your program will default to
+  // * if no song is provided then program will default to
   //   * "The Sign" by Ace of Base
   if(value === ""){
       console.log("************");
@@ -128,14 +128,14 @@ function spotifyThisSong (){
 
 }
 
-// * `movie-this`
+// * `movie`
 function movieThis(){ 
 
   var queryURL = "//www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=40e9cece";
 
 request(queryURL, function(error, response, body) {
 
-  // If the request is successful (i.e. if the response status code is 200)
+  // If the request is successful
   if (error) {
     console.log("Error occurred: " + error);
     return;
@@ -169,7 +169,7 @@ request(queryURL, function(error, response, body) {
 // * `do-what-it-says`
 function doThis(){
 
-// Feel free to change the text in that document to test out the feature for other commands.
+
 fs.readFile("random.txt", "utf8", function(error,data){
 
   var content = data.split(",");
